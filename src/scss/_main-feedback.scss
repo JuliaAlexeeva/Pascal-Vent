@@ -1,0 +1,103 @@
+.main__feedback {
+    background-color: #D9FADD;
+    position: relative;
+}
+// ======================================================
+.main__feedback-bcg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right;
+    }
+    @media (max-width: 479.98px) {
+        display: none;
+    }
+}
+// ======================================================
+.feedback__container {
+}
+.feedback__block {
+    padding: 55px 0;
+    z-index: 1;
+    position: relative;
+    transition: var(--default__transition);
+    @media (max-width: 991.98px) {
+        padding: 40px 0;
+    }
+}
+// ======================================================
+.feedback__block-title {
+    text-transform: unset;
+    &:not(:last-child) {
+        margin: 0px 0px 30px 0px;
+    }
+}
+// ======================================================
+.feedback__block-form {
+}
+.feedback-form {
+    display: flex;
+    align-items: center;
+    transition: var(--default__transition);
+    @media (max-width: 991.98px) {
+        flex-direction: column;
+        align-items: unset;
+    }
+}
+// ======================================================
+.feedback-form__inputs {
+    display: flex;
+    transition: var(--default__transition);
+    @media (max-width: 991.98px) {
+        flex-direction: column;
+    }
+}
+// ======================================================
+.feedback-form__input {
+    width: 290px;
+    height: 57px;
+    transition: var(--default__transition);
+    &:not(:last-child) {
+        margin: 0px 30px 0px 0px;
+    }
+    @media (max-width: 991.98px) {
+        &:not(:last-child) {
+            margin: 0px 0px 25px 0px;
+        }
+        width: 320px;
+    }
+    @media (max-width: 479.98px) {
+        width: 100%;
+    }
+}
+// ======================================================
+.feedback-form__button {
+    width: 229px;
+    height: 75px;
+    margin: 0px 0px 0px 60px;
+    a {
+        width: 209px;
+        height: 55px;
+        @media (max-width: 991.98px) {
+            width: 300px;
+        }
+        @media (max-width: 479.98px) {
+            width: 100%;
+        }
+    }
+    @media (max-width: 991.98px) {
+        margin: 35px 0px 0px 0px;
+        width: 320px;
+    }
+    @media (max-width: 479.98px) {
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+// ======================================================

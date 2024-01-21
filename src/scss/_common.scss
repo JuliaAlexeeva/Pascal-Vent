@@ -1,0 +1,312 @@
+/* ------------------------------------------------------------------------------------------- */
+// Переменные
+:root {
+    --index: calc(1vw + 1vh);
+    --default__transition: all 0.3s ease 0s;
+    --def_ff: 'proxima';
+    --color: red;
+}
+/* ------------------------------------------------------------------------------------------- */
+@import "mixins";
+/* ------------------------------------------------------------------------------------------- */
+/* Чтобы скролл был на всем макете */
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+/* ------------------------------------------------------------------------------------------- */
+// Любые объект, в классе которого содержится такой класс __container, то к нему применить эти свойства
+// то есть теперь достаточно просто писать header__container и все, без приписки доп класса _container
+[class*="__container"] {
+    max-width: 1230px; // + 60px из-за отступа безопасности
+    margin: 0 auto;
+    padding: 0 30px;
+    /* --- PC --- */
+    @media (max-width: 1145.98px) {
+        
+    }
+    /* --- PC Small --- */
+    @media (max-width: 1057px) {
+        
+    }
+    // дробные значения так как планшет в горизонтальном имеет 768, но нам не нужна мобилка на планшете
+    // поэтому немного уменьшаем
+    /* --- TABLET --- */
+    @media (max-width: 991.98px) {
+     
+    }
+    
+    /* --- MOBILE --- */
+    @media (max-width: 767.98px) {
+        
+    }
+    /* --- MOBILE SMALL --- */
+    @media (max-width: 479.98px) {
+       
+    }
+    /* --- MOBILE LITTLE --- */
+    @media (max-width: 379.98px) {
+
+    }
+}
+// TODO: DRY-Blocks !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/* ============================================================================================== */
+.dry-green__button {
+    // Ширину на кнопку ставить и ширину на тег p 
+    background-color: rgba(255,255,255,0.45);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--default__transition);
+    pointer-events: none;
+    a {
+        pointer-events: all;
+        background-color: #5CCD6A;
+        box-shadow: inset 2px -2px 12px rgba(34, 111, 33, 0.36);
+        color: #FFFFFF;
+        @include fontz(16);
+        @include lineheight(20,16);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 17px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: var(--default__transition);
+    }
+    @media (min-width: 991.98px) {
+        &:hover {
+            a {
+                background-color: #54E165;
+            }
+        }
+    }
+}
+// ======================================================
+.dry-green__button-huge {
+    width: 477px;
+    height: 115px;
+    background-color: rgba(120,192,129,0.25);
+    border-radius: 40px;
+    a {
+        border-radius: 30px;
+        width: 447px;
+        height: 85px;
+    }
+    @media (max-width: 991.98px) {
+        width: 380px;
+        height: 92px;
+        a {
+            width: 357px;
+            height: 68px;
+        }
+    }
+    @media (max-width: 767.98px) {
+        width: 320px;
+        height: 90px;
+        border-radius: 30px;
+        a {
+            border-radius: 20px;
+            width: 290px;
+            height: 60px;
+        }
+    }
+    @media (max-width: 479.98px) {
+        width: 100%;
+        padding: 0 15px;
+        a {
+            width: 100%;
+        }
+    }
+}
+// ======================================================
+.dry-link__hover {
+    position: relative;
+    &::after {
+        background-color: #495E4C;
+    }
+    @media (min-width: 991.98px) {
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            transition: width 0.5s;
+        }
+        &:hover {
+            &::after {
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+// ======================================================
+.dry-common__padding {
+    padding: 85px 0;
+    transition: var(--default__transition);
+    @media (max-width: 1145.98px) {
+        padding: 65px 0;
+    }
+    @media (max-width: 991.98px) {
+        padding: 40px 0;
+    }
+}
+// ======================================================
+.dry-common__title {
+    text-transform: capitalize;
+    color: #495E4C;
+    font-family: 'Ruberoid';
+    @include fontz(45);
+    @include lineheight(60,45);
+    text-transform: capitalize;
+    transition: var(--default__transition);
+    &:not(:last-child) {
+        margin: 0px 0px 20px 0px;
+    }
+    @media (max-width: 1145.98px) {
+        @include fontz(38);
+        @include lineheight(50,38);
+    }
+    @media (max-width: 991.98px) {
+        @include fontz(30);
+        @include lineheight(40,30);
+    }
+    @media (max-width: 767.98px) {
+        @include fontz(28);
+        @include lineheight(38,28);
+    }
+    @media (max-width: 479.98px) {
+        @include fontz(24);
+        @include lineheight(30,24);
+    }
+}
+// ======================================================
+.dry-common__input {
+    background: #FFFFFF;
+    border-radius: 15px;
+    -webkit-appearance: none; // FOR Safari IOS
+    box-shadow: 0px 0px 10px rgba(73, 93, 76, 0.1);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    @include lineheight(28,20);
+    color: #495E4C;
+    font-weight: 700;
+    transition: var(--default__transition);
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.19);
+        opacity: 1;
+        font-weight: 400;
+        color: #7CA381;
+        @include fontz(14);
+        @include lineheight(17,14);
+    }
+    &:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    &:focus::-moz-placeholder {
+        color: transparent;
+    }
+    &:focus:-moz-placeholder {
+        color: transparent;
+    }
+    &:focus:-ms-input-placeholder {
+        color: transparent;
+    }
+    &:focus {
+        box-shadow: 0 0 10px #7CA381;
+    }
+}
+// ======================================================
+.dry-common__navigation {
+    display: flex;
+    .dry-common__nav-button {
+        &:first-child {
+            .dry-common__nav-inner {
+                transform: scaleX(-1);
+            }
+        }
+        &:last-child {
+            .dry-common__nav-inner {
+
+            }
+        }
+    }
+}
+.dry-common__nav-button {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(120,192,129,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--default__transition);
+    &:not(:last-child) {
+        margin: 0px 25px 0px 0px;
+    }
+    &.swiper-button-disabled {
+        pointer-events: none;
+        background: rgba(255,255,255,0.6);
+        .dry-common__nav-inner {
+            background: #FFFFFF;
+            box-shadow: unset;
+            &::before {
+                background: #D9FADD;
+            }
+            &::after {
+                background: #D9FADD;
+            }
+        }
+    }
+}
+.dry-common__nav-inner {
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    background: #5CCD6A;
+    box-shadow: inset 2px -2px 5px rgba(29, 92, 28, 0.2);
+    border-radius: 50%;
+    position: relative;
+    transition: var(--default__transition);
+    &::before,&::after {
+        content: '';
+        position: absolute;
+        background: #FFFFFF;
+        height: 4px;
+        width: 12px;
+        border-radius: 16px;
+        top: 50%;
+        left: 50%;
+        transition: var(--default__transition);
+    }
+    &::before {
+        transform: rotate(45deg);
+        margin: -6px 0 0 -5px;
+    }
+    &::after {
+        transform: rotate(-45deg);
+        margin: 1px 0 0 -5px;
+    }
+    @media (min-width: 991.98px) {
+        &:hover {
+            background-color: #54E165;
+        }
+    }
+}
+/* ---------------------------MAIN------------------------------------------------------------ */
+.main { 
+    /* позволяем контенту увеличиваться и он прибивает футер вниз */
+    flex: 1 1 auto;
+}
+/* ------------------------------------------------------------------------------------------- */

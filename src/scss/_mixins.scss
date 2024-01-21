@@ -1,0 +1,22 @@
+// Миксины
+@mixin fontz($fz) {
+    font-size: $fz * 1px;
+}
+// краткий вызов: lh
+@mixin lineheight($lh,$fz) {
+    line-height: ($lh/$fz)*100%;
+}
+
+// Шаблоны
+%flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+// Миксин + шаблон
+@mixin flexCenterRow {
+    @extend %flexCenter;
+    flex-direction: row;
+}

@@ -1,0 +1,350 @@
+// Миксины
+@mixin fontz($fz) {
+    font-size: $fz * 1px;
+}
+// краткий вызов: lh
+@mixin lineheight($lh,$fz) {
+    line-height: ($lh/$fz)*100%;
+}
+// ====================POPUPS========================== //
+.popup {
+    position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	// чтобы попап появлялся с анимицией красиво, то нельзя display none/block использовать
+	// делаем иначе убирая проявление и возможность выделения
+	opacity: 0;
+	visibility: hidden;
+	// чтобы был скролл, если много текста
+	overflow-y: auto;
+	overflow-x: hidden;
+	transition: all 0.5s ease 0s;
+	z-index: 50000;
+}
+// Класс вешается на ту ссылку, которой хотим вызывать попап
+// с ссылке указываем id нужного попапа href="#popup__search"
+.popup__link {}
+// на теге header/main/footer добавить класс, это для расчета ширины скролла
+// чтобы не дергался header
+.lock-padding {}
+
+// -----------------------------------------------
+// Тут используем JS (тоже самое, но при получении класс open)
+.popup {
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        -webkit-backdrop-filter: blur(10px); // для IOS
+        backdrop-filter: blur(10px);
+        .popup__content {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+}
+// ---------------------------------------------------------- стилизация попапа (общий)
+.popup__body {
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	// чтобы не прилипал к краям экрана
+	padding: 30px 15px;
+    position: relative;
+}
+.popup__content {
+    position: relative;
+	background: #D9FADD;
+	color: #000;
+	max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+	padding: 35px 15px 15px;
+    box-shadow: 0px 0px 10px rgba(73, 93, 76, 0.3);
+    border-radius: 50px;
+	// анимация
+	transition: all 0.5s ease 0s;
+	opacity: 0;
+    transform: translate(100%, 0);
+    &.rapid {
+        padding: 35px 0px 0px;
+        max-width: 445px;
+    }
+    @media (max-width: 479.98px) {
+        padding: 25px 15px 15px;
+        border-radius: 35px;
+        &.rapid {
+            padding: 25px 0px 0px;
+        }
+    }
+}
+// -----------------------------------------------
+.popup__content-exit {
+    position: absolute;
+    top: -85px;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    background: rgba(120,192,129,0.25);
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    pointer-events: none;
+    transition: var(--default__transition);
+    a {
+        position: relative;
+        pointer-events: all;
+        background: #5CCD6A;
+        box-shadow: inset 2px -2px 12px rgba(34, 111, 33, 0.36);
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        transition: var(--default__transition);
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            background: #FFFFFF;
+            width: 25px;
+            height: 4px;
+            border-radius: 12px;
+            left: 50%;
+            margin: 0px 0px 0px -12.5px;
+            top: 22px;
+            @media (max-width: 479.98px) {
+                top: 16px;
+            }
+        }
+        &::before {
+            transform: rotate(45deg);
+        }
+        &::after {
+            
+            transform: rotate(-45deg);
+        }
+    }
+    @media (min-width: 991.98px) {
+        &:hover {
+            a {
+                background-color: #54E165;
+            }
+        }
+    }
+    @media (max-width: 479.98px) {
+        width: 50px;
+        height: 50px;
+        top: -65px;
+        right: 0;
+        padding: 7px;
+    }
+}
+.close-popup {
+}
+// -----------------------------------------------
+.popup__content-title {
+    @include fontz(40);
+    @include lineheight(55,40);
+    color: #495E4C;
+    font-family: 'Ruberoid';
+    max-width: 310px;
+    text-transform: capitalize;
+    position: relative;
+    transition: var(--default__transition);
+    &:not(:last-child) {
+        margin: 0px 0px 20px 0px;
+    }
+    span {
+        display: inline-block;
+        width: 120px;
+        height: 2px;
+        background-color: #78C081;
+        border-radius: 1.5px;
+        margin: 0px 0px 10px 15px;
+        transition: var(--default__transition);
+        @media (max-width: 479.98px) {
+            width: 93px;
+            margin: 0px 0px 8px 8px;
+        }
+    }
+    &.rapid {
+        max-width: 325px;
+        span {
+            width: 130px;
+            @media (max-width: 479.98px) {
+                width: 100px;
+                margin: 0px 0px 8px 8px;
+            }
+        }
+        @media (max-width: 479.98px) {
+            max-width: 250px;
+        }
+    }
+    @media (max-width: 479.98px) {
+        max-width: 230px;
+        @include fontz(30);
+        @include lineheight(40,30);
+    }
+}
+// -----------------------------------------------
+.popup__content-form {
+}
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(73, 93, 76, 0.1);
+    border-radius: 35px;
+    padding: 35px;
+    transition: var(--default__transition);
+    @media (max-width: 479.98px) {
+        padding: 25px;
+    }
+}
+// -----------------------------------------------
+.popup-form__input {
+    width: 100%;
+    height: 50px;
+    &:first-child {
+        margin: 0px 0px 20px 0px;
+    }
+    &::placeholder {
+        font-weight: 500;
+    }
+    // Убирать placeholder при фокусе
+    &:focus::-webkit-input-placeholder {
+        color: transparent;
+    }  
+    &:focus::-moz-placeholder {
+        color: transparent;
+    }
+    &:focus:-moz-placeholder {
+        color: transparent;
+    }
+    &:focus:-ms-input-placeholder {
+        color: transparent;
+    }
+}
+// -----------------------------------------------
+.popup-form__button {
+    margin: 35px 0px 0px 0px;
+    width: 100%;
+    height: 75px;
+    padding: 10px;
+    background: rgba(120,192,129,0.25);
+    a {
+        width: 100%;
+        height: 100%;
+    }
+}
+// -----------------------------------------------
+.popup__content-logo {
+    margin: 15px 0px 0px 0px;
+    .sprite-icon__logo {
+        width: 228px;
+        height: 68px;
+        transition: var(--default__transition);
+        @media (max-width: 479.98px) {
+            width: 160px;
+            height: 48px;
+        }
+    }
+}
+
+// -----------------------------------------------RAPID
+.popup__content-rapid {
+}
+.content-rapid {
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(73, 93, 76, 0.1);
+    border-radius: 35px;
+    padding: 35px;
+    color: #7CA381;
+    transition: var(--default__transition);
+    @media (max-width: 479.98px) {
+        padding: 25px;
+    }
+}
+// -----------------------------------------------
+.content-rapid__text {
+    @include fontz(16);
+    @include lineheight(26,16);
+    &:not(:last-child) {
+        margin: 0px 0px 20px 0px;
+    }
+}
+// -----------------------------------------------
+.content-rapid__schedule {
+    span {
+        font-weight: 600;
+        @include fontz(16);
+        @include lineheight(19,16);
+    }
+    margin: 0px 0px 40px 0px;
+    transition: var(--default__transition);
+    @media (max-width: 479.98px) {
+        margin: 0px 0px 30px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.content-rapid__schedule-clock {
+    margin: 15px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    .sprite-icon__clock {
+        margin: 0px 15px 0px 0px;
+        width: 22px;
+        height: 22px;
+    }
+}
+// -----------------------------------------------
+.content-rapid__phones {
+    display: flex;
+    justify-content: space-between;
+    transition: var(--default__transition);
+    > span {
+        height: 30px;
+        width: 1px;
+        background-color: #BEE1C2;
+        border-radius: 0.5px;
+        display: inline-block;
+        transition: var(--default__transition);
+        @media (max-width: 479.98px) {
+            height: 1px;
+            width: 30px;
+            margin: 5px 0;
+        }
+    }
+    @media (max-width: 479.98px) {
+        flex-direction: column;
+        justify-content: unset;
+        align-items: center;
+    }
+}
+.content-rapid__phone {
+    display: flex;
+    align-items: center;
+    color: #7B897D;
+    @include fontz(16);
+    @include lineheight(24,16);
+    font-weight: 600;
+    .sprite-icon__phone {
+        margin: 0px 15px 0px 0px;
+        width: 22px;
+        height: 22px;
+    }
+    @media (min-width: 991.98px) {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

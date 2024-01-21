@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<!-- head.html -->
+@@include('blocks/head.html', {
+"title": "Pascal Vent",
+"style": "style.min.css",
+})
+
+<body>
+    <div class="wrapper">
+        <!-- header.html -->
+        @@include('blocks/header.html', {})
+
+        <main class="main">
+            @@include('blocks/pages/home.html', {})
+        </main>
+
+        <!-- footer.html -->
+        @@include('blocks/footer.html', {})
+    </div>
+    <script src="js/app.min.js"></script>
+</body>
+
+</html>
